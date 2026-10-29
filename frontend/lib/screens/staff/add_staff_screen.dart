@@ -41,72 +41,74 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: ModernAppBar(title: 'Add manager', onBack: () => context.pop()),
-      body: Column(
-        children: [
-          // Form Content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(24, 10, 24, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  // First Name
-                  FormTextField(
-                    label: 'First Name',
-                    controller: _firstNameController,
-                  ),
-                  const SizedBox(height: 10),
-                  // Last Name
-                  FormTextField(
-                    label: 'Last Name',
-                    controller: _lastNameController,
-                  ),
-                  const SizedBox(height: 10),
-                  // Position
-                  FormTextField(
-                    label: 'Position',
-                    controller: _positionController,
-                  ),
-                  const SizedBox(height: 10),
-                  // Email
-                  FormTextField(
-                    label: 'Email',
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: 10),
-                  // Phone
-                  FormTextField(
-                    label: 'Phone',
-                    controller: _phoneController,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  const SizedBox(height: 10),
-                  // Address
-                  FormTextField(
-                    label: 'Address',
-                    controller: _addressController,
-                    maxLines: 2,
-                  ),
-                ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Form Content
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    // First Name
+                    FormTextField(
+                      label: 'First Name',
+                      controller: _firstNameController,
+                    ),
+                    const SizedBox(height: 10),
+                    // Last Name
+                    FormTextField(
+                      label: 'Last Name',
+                      controller: _lastNameController,
+                    ),
+                    const SizedBox(height: 10),
+                    // Position
+                    FormTextField(
+                      label: 'Position',
+                      controller: _positionController,
+                    ),
+                    const SizedBox(height: 10),
+                    // Email
+                    FormTextField(
+                      label: 'Email',
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: 10),
+                    // Phone
+                    FormTextField(
+                      label: 'Phone',
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    const SizedBox(height: 10),
+                    // Address
+                    FormTextField(
+                      label: 'Address',
+                      controller: _addressController,
+                      maxLines: 2,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Save Button
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-            decoration: BoxDecoration(
-              color: AppColors.background,
-              border: const Border(
-                top: BorderSide(color: AppColors.border, width: 1),
+            // Save Button
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                border: const Border(
+                  top: BorderSide(color: AppColors.border, width: 1),
+                ),
               ),
+              child: PrimaryButton(onPressed: _onSave, text: 'Save'),
             ),
-            child: PrimaryButton(onPressed: _onSave, text: 'Save'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

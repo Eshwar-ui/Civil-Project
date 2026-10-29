@@ -53,58 +53,60 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppConstants.splashBackground,
-      body: Center(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo Placeholder - Following wireframe's rounded gray square
-              Container(
-                height: 100,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.grey[400],
-                  borderRadius: BorderRadius.circular(
-                    AppConstants.borderRadius,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
+      body: SafeArea(
+        child: Center(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo Placeholder - Following wireframe's rounded gray square
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.borderRadius,
                     ),
-                  ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.architecture,
+                    size: 50,
+                    color: Colors.white,
+                  ),
                 ),
-                child: const Icon(
-                  Icons.architecture,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Company Name
-              Text(
-                AppConstants.companyName,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                  color: Colors.black87,
+                // Company Name
+                Text(
+                  AppConstants.companyName,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-              // Tagline
-              Text(
-                AppConstants.tagLine.toUpperCase(),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  letterSpacing: 2.0,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
+                // Tagline
+                Text(
+                  AppConstants.tagLine.toUpperCase(),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    letterSpacing: 2.0,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

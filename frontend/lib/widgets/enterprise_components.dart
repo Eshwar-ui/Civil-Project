@@ -1136,63 +1136,157 @@ class FormTextField extends StatelessWidget {
 // APP BAR COMPONENTS
 // ============================================================
 
-/// Modern AppBar matching Figma design
+/// Reusable app bar used across all screens. Change styling here to apply app-wide.
 class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  /// Simple string title. Ignored if [titleWidget] is non-null.
+  final String? title;
+
+  /// Custom title widget (e.g. Column with title + status). Takes precedence over [title].
+  final Widget? titleWidget;
   final VoidCallback? onBack;
   final Widget? action;
   final bool centerTitle;
 
+  /// Whether to show the bottom border line. Default true.
+  final bool showBottomBorder;
+
+  /// Background color. Default is surface style.
+  final Color? backgroundColor;
+
   const ModernAppBar({
     super.key,
-    required this.title,
+    this.title,
+    this.titleWidget,
     this.onBack,
     this.action,
     this.centerTitle = true,
+    this.showBottomBorder = true,
+    this.backgroundColor,
   });
+
+  /// App bar with project-style title and optional SITE ACTIVE tag.
+  factory ModernAppBar.projectHeader({
+    Key? key,
+    required String title,
+    double titleFontSize = 26,
+    bool showSiteActive = true,
+    VoidCallback? onBack,
+    Widget? action,
+  }) {
+    return ModernAppBar(
+      centerTitle: true,
+      key: key,
+      titleWidget: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: titleFontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+              letterSpacing: -0.65,
+            ),
+          ),
+          if (showSiteActive) ...[
+            const SizedBox(height: 2),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: AppColors.success.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  'SITE ACTIVE',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.success,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
+      onBack: onBack,
+      action: action,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white.withOpacity(0.9),
-      elevation: 0,
-      shadowColor: Colors.black.withOpacity(0.1),
-      surfaceTintColor: Colors.transparent,
-      leading: onBack != null
-          ? Container(
-              margin: const EdgeInsets.only(left: 4),
-              child: _AppBarIconButton(
-                icon: Icons.arrow_back,
-                onPressed: onBack!,
-              ),
-            )
-          : null,
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: AppColors.textPrimary,
-          letterSpacing: -0.65,
-        ),
-      ),
-      centerTitle: centerTitle,
-      actions: action != null
-          ? [Container(margin: const EdgeInsets.only(right: 4), child: action!)]
-          : centerTitle
-          ? [
-              const SizedBox(width: 48), // Spacer for center alignment
-            ]
-          : null,
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1.18),
-        child: Container(height: 1.18, color: AppColors.border),
+    final Widget titleChild = titleWidget != null
+        ? titleWidget!
+        : (title != null && title!.isNotEmpty)
+        ? Text(
+            title!,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+              letterSpacing: -0.65,
+            ),
+          )
+        : const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 0),
+      child: AppBar(
+        backgroundColor: backgroundColor ?? Colors.white.withOpacity(0.9),
+        elevation: 0,
+        shadowColor: Colors.black.withOpacity(0.1),
+        surfaceTintColor: Colors.transparent,
+        leading: onBack != null
+            ? _AppBarIconButton(icon: Icons.arrow_back, onPressed: onBack!)
+            : null,
+        title: titleChild,
+        centerTitle: centerTitle,
+        actions: action != null
+            ? [
+                Container(
+                  margin: const EdgeInsets.only(right: 4),
+                  child: action!,
+                ),
+              ]
+            : centerTitle
+            ? [const SizedBox(width: 48)]
+            : null,
       ),
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(76);
+}
+
+/// Styled action button for use in [ModernAppBar]. Use for edit, etc.
+Widget appBarActionButton({
+  required IconData icon,
+  required VoidCallback onPressed,
+}) {
+  return Container(
+    width: 48,
+    height: 48,
+    decoration: BoxDecoration(
+      color: AppColors.surfaceVariant,
+      borderRadius: AppRadius.largeRadius,
+      border: Border.all(color: AppColors.border, width: 1.18),
+    ),
+    child: IconButton(
+      icon: Icon(icon, size: 24, color: AppColors.textSecondary),
+      onPressed: onPressed,
+      padding: EdgeInsets.zero,
+    ),
+  );
 }
 
 /// AppBar icon button with rounded square shape matching Figma
@@ -1207,10 +1301,11 @@ class _AppBarIconButton extends StatelessWidget {
     return Container(
       width: 48,
       height: 48,
+      margin: const EdgeInsets.only(left: 16),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        // color: AppColors.surfaceVariant,
         borderRadius: AppRadius.largeRadius,
-        border: Border.all(color: AppColors.border, width: 1.18),
+        // border: Border.all(color: AppColors.border, width: 1.18),
       ),
       child: IconButton(
         icon: Icon(icon, size: 24, color: AppColors.textSecondary),

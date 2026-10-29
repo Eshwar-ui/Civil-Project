@@ -2,7 +2,7 @@ name: frontend
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -53,13 +53,13 @@ dev_dependencies:
   build_runner: ^2.10.5
   custom_lint: ^0.8.1
   riverpod_lint: ^3.1.0
+  flutter_launcher_icons: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/logos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -94,3 +95,22 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# App icon (CIVILPRO logo) - run: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logos/applogo.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: "assets/logos/applogo.png"
+    background_color: "#ffffff"
+    theme_color: "#1a1a2e"
+  windows:
+    generate: true
+    image_path: "assets/logos/applogo.png"
+  macos:
+    generate: true
+    image_path: "assets/logos/applogo.png"

@@ -6,7 +6,7 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Projects Screen Template')),
+      body: SafeArea(child: Center(child: Text('Projects Screen Template'))),
     );
   }
 }
@@ -17,7 +17,7 @@ class ManagersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Managers Screen Template')),
+      body: SafeArea(child: Center(child: Text('Managers Screen Template'))),
     );
   }
 }
@@ -27,7 +27,9 @@ class ReportsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Reports Screen Template')));
+    return const Scaffold(
+      body: SafeArea(child: Center(child: Text('Reports Screen Template'))),
+    );
   }
 }
 
@@ -36,6 +38,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Profile Screen Template')));
+    return const Scaffold(
+      body: SafeArea(child: Center(child: Text('Profile Screen Template'))),
+    );
   }
 }

@@ -83,12 +83,12 @@ class _EditManagerDetailsScreenState extends State<EditManagerDetailsScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: ModernAppBar(title: 'Edit Details', onBack: () => context.pop()),
-      body: Column(
-        children: [
-          // Form Content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(24, 10, 24, 20),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Form Content
+            SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -134,21 +134,24 @@ class _EditManagerDetailsScreenState extends State<EditManagerDetailsScreen> {
                 ],
               ),
             ),
-          ),
 
-          // Update Button
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-            decoration: BoxDecoration(
-              color: AppColors.background,
-              border: const Border(
-                top: BorderSide(color: AppColors.border, width: 1),
+            // Update Button
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                border: const Border(
+                  top: BorderSide(color: AppColors.border, width: 1),
+                ),
+              ),
+              child: PrimaryButton(
+                onPressed: _onUpdate,
+                text: 'Update Details',
               ),
             ),
-            child: PrimaryButton(onPressed: _onUpdate, text: 'Update Details'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

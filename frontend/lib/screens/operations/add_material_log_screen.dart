@@ -35,7 +35,7 @@ class _AddMaterialLogScreenState extends State<AddMaterialLogScreen> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(

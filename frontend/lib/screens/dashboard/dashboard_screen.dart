@@ -133,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // ============ OPERATIONS SECTION ============
   Widget _buildOperationsSection() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -183,7 +183,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // ============ ACTIVE PROJECTS SECTION ============
   Widget _buildActiveProjectsSection() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: Column(
         children: [
           SectionHeader(
@@ -226,7 +226,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // ============ RECENT OPERATIONS SECTION ============
   Widget _buildRecentOperationsSection() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

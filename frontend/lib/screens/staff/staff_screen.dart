@@ -16,16 +16,17 @@ class _StaffScreenState extends State<StaffScreen> {
     context.pushNamed('add-staff');
   }
 
-  void _onManagerTap(BuildContext context, String name, String role, String initials) {
+  void _onManagerTap(
+    BuildContext context,
+    String name,
+    String role,
+    String initials,
+  ) {
     final managerId = name.toLowerCase().replaceAll(' ', '-');
     context.pushNamed(
       'manager-details',
       pathParameters: {'id': managerId},
-      queryParameters: {
-        'name': name,
-        'role': role,
-        'initials': initials,
-      },
+      queryParameters: {'name': name, 'role': role, 'initials': initials},
     );
   }
 
@@ -39,7 +40,7 @@ class _StaffScreenState extends State<StaffScreen> {
             // Header Section with white background
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               decoration: const BoxDecoration(
                 color: AppColors.surface,
                 border: Border(
@@ -162,7 +163,7 @@ class _StaffScreenState extends State<StaffScreen> {
                             borderRadius: BorderRadius.circular(8),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: 24,
+                                horizontal: 20,
                                 vertical: 7,
                               ),
                               child: Row(
@@ -195,9 +196,7 @@ class _StaffScreenState extends State<StaffScreen> {
             ),
 
             // Staff List
-            Expanded(
-              child: _buildStaffList(),
-            ),
+            Expanded(child: _buildStaffList()),
           ],
         ),
       ),
@@ -239,10 +238,7 @@ class _StaffScreenState extends State<StaffScreen> {
             const SizedBox(height: 8),
             Text(
               'Try adjusting your search',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.textSecondary,
-              ),
+              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
           ],
         ),
@@ -250,7 +246,7 @@ class _StaffScreenState extends State<StaffScreen> {
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(24, 8, 24, 120),
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
       itemCount: filteredStaff.length,
       separatorBuilder: (context, index) => const SizedBox(height: 8),
       itemBuilder: (context, index) {
@@ -284,10 +280,7 @@ class _StaffScreenState extends State<StaffScreen> {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: AppRadius.xlRadius,
-          border: Border.all(
-            color: AppColors.border,
-            width: 1.35,
-          ),
+          border: Border.all(color: AppColors.border, width: 1.35),
           boxShadow: AppColors.cardShadow,
         ),
         child: Row(
@@ -345,10 +338,7 @@ class _StaffScreenState extends State<StaffScreen> {
               decoration: BoxDecoration(
                 color: AppColors.surfaceVariant,
                 borderRadius: AppRadius.mediumRadius,
-                border: Border.all(
-                  color: AppColors.border,
-                  width: 1.18,
-                ),
+                border: Border.all(color: AppColors.border, width: 1.18),
               ),
               child: const Icon(
                 Icons.chevron_right,

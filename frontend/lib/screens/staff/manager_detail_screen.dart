@@ -49,150 +49,139 @@ class ManagerDetailScreen extends StatelessWidget {
       appBar: ModernAppBar(
         title: 'Manager Details',
         onBack: () => context.pop(),
-        action: Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
-            borderRadius: AppRadius.largeRadius,
-            border: Border.all(color: AppColors.border, width: 1.18),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.edit_outlined,
-              size: 24,
-              color: AppColors.textSecondary,
-            ),
-            onPressed: () => _onEdit(context),
-            padding: EdgeInsets.zero,
-          ),
+        action: appBarActionButton(
+          icon: Icons.edit_outlined,
+          onPressed: () => _onEdit(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Manager Profile Card
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: AppRadius.largeRadius,
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                  width: 1,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Manager Profile Card
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: AppRadius.largeRadius,
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                    width: 1,
+                  ),
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Avatar and Name Section
-                  Row(
-                    children: [
-                      // Avatar
-                      Container(
-                        width: 76,
-                        height: 76,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: AppRadius.largeRadius,
-                        ),
-                        child: Center(
-                          child: Text(
-                            initials,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Avatar and Name Section
+                    Row(
+                      children: [
+                        // Avatar
+                        Container(
+                          width: 76,
+                          height: 76,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: AppRadius.largeRadius,
+                          ),
+                          child: Center(
+                            child: Text(
+                              initials,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 20),
-                      // Name and Role
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              name,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                        const SizedBox(width: 20),
+                        // Name and Role
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                name,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textPrimary,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              role,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
+                              const SizedBox(height: 5),
+                              Text(
+                                role,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 28),
+                      ],
+                    ),
+                    const SizedBox(height: 28),
 
-                  // Contact Information
-                  _buildInfoRow(
-                    label: 'email',
-                    value: 'rameshkumar@manager.com',
-                    showCopy: true,
-                    onCopy: () => _onCopyEmail('rameshkumar@manager.com'),
-                  ),
-                  const SizedBox(height: 12),
-                  _buildInfoRow(label: 'Phone', value: '+91 9874563210'),
-                  const SizedBox(height: 12),
-                  _buildInfoRow(label: 'Join Date', value: '10/28/12'),
-                  const SizedBox(height: 12),
-                  _buildInfoRow(
-                    label: 'address',
-                    value: '4517 Washington Ave. Manchester, Kentucky 39495',
-                    isMultiline: true,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Assigned Projects Card
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: AppRadius.largeRadius,
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                  width: 1,
+                    // Contact Information
+                    _buildInfoRow(
+                      label: 'email',
+                      value: 'rameshkumar@manager.com',
+                      showCopy: true,
+                      onCopy: () => _onCopyEmail('rameshkumar@manager.com'),
+                    ),
+                    const SizedBox(height: 12),
+                    _buildInfoRow(label: 'Phone', value: '+91 9874563210'),
+                    const SizedBox(height: 12),
+                    _buildInfoRow(label: 'Join Date', value: '10/28/12'),
+                    const SizedBox(height: 12),
+                    _buildInfoRow(
+                      label: 'address',
+                      value: '4517 Washington Ave. Manchester, Kentucky 39495',
+                      isMultiline: true,
+                    ),
+                  ],
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Assigned Projects:',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _buildProjectList(),
-                ],
-              ),
-            ),
 
-            // Bottom padding
-            const SizedBox(height: 120),
-          ],
+              const SizedBox(height: 16),
+
+              // Assigned Projects Card
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: AppRadius.largeRadius,
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                    width: 1,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Assigned Projects:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildProjectList(),
+                  ],
+                ),
+              ),
+
+              // Bottom padding
+              const SizedBox(height: 120),
+            ],
+          ),
         ),
       ),
     );

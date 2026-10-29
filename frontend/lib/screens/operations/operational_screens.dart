@@ -10,7 +10,7 @@ class MaterialsScreen extends StatefulWidget {
 }
 
 class _MaterialsScreenState extends State<MaterialsScreen> {
-  String _selectedView = 'Received'; // 'Received' or 'Consumption'
+  String _selectedView = 'Consumption'; // 'Received' or 'Consumption'
   final TextEditingController _materialNameController = TextEditingController();
   final TextEditingController _gradeController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
@@ -32,7 +32,7 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -78,118 +78,16 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
 
               // Form Card
               Container(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: AppRadius.mediumRadius,
                   border: Border.all(color: AppColors.border, width: 1.18),
                   boxShadow: AppColors.cardShadow,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Material name dropdown
-                    _buildDropdownField(
-                      label: 'Material name',
-                      hint: '-- Select Material --',
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Grade / type
-                    FormTextField(
-                      label: 'Grade / type',
-                      controller: _gradeController,
-                      hintText: 'Cement, Iron, etc.',
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Quantity & Unit (side by side)
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: FormTextField(
-                            label: 'Quantity',
-                            controller: _quantityController,
-                            hintText: '50',
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: FormTextField(
-                            label: 'Unit',
-                            controller: _unitController,
-                            hintText: 'pkts',
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Vendor / supplier
-                    FormTextField(
-                      label: 'Vendor / supplier',
-                      controller: _vendorController,
-                      hintText: 'Enter vendor name',
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Payment Type dropdown
-                    _buildDropdownField(
-                      label: 'Payment Type',
-                      hint: '-- Select Payment Type --',
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Bill amount
-                    FormTextField(
-                      label: 'Bill amount',
-                      controller: _billAmountController,
-                      hintText: '₹',
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Save Material Entry button
-                    PrimaryButton(
-                      text: 'Save Material Entry',
-                      onPressed: () {
-                        // TODO: Save material entry
-                      },
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Add New Material button (outlined)
-                    Container(
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: AppRadius.mediumRadius,
-                        border: Border.all(color: AppColors.primary, width: 2),
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            // TODO: Add new material
-                          },
-                          borderRadius: AppRadius.mediumRadius,
-                          child: Center(
-                            child: Text(
-                              'Add New Material',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                child: _selectedView == 'Consumption'
+                    ? _buildConsumptionForm()
+                    : _buildReceivedForm(),
               ),
             ],
           ),
@@ -268,10 +166,10 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
           const SizedBox(height: 16),
           _buildMaterialHistoryCard(
             materialName: 'Asian Paints White',
-            grade: 'Apex Dust Proof',
+            grade: 'APEX DUST PROOF',
             supplier: 'Hardware Hub',
             quantity: '40',
-            unit: '',
+            unit: 'L',
             date: 'Oct 22',
           ),
 
@@ -279,6 +177,135 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
           const SizedBox(height: 120),
         ],
       ),
+    );
+  }
+
+  /// Consumption tab: Material used, Quantity (20), Unit (pkts), Log Consumption button.
+  Widget _buildConsumptionForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildDropdownField(
+          label: 'Material used',
+          hint: '-- Select Material --',
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: FormTextField(
+                label: 'Quantity',
+                controller: _quantityController,
+                hintText: '20',
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: FormTextField(
+                label: 'Unit',
+                controller: _unitController,
+                hintText: 'pkts',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        PrimaryButton(
+          text: 'Log Consumption',
+          onPressed: () {
+            // TODO: Save consumption entry
+          },
+        ),
+      ],
+    );
+  }
+
+  /// Received tab: full form with vendor, payment, bill amount, Save + Add New.
+  Widget _buildReceivedForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildDropdownField(
+          label: 'Material name',
+          hint: '-- Select Material --',
+        ),
+        const SizedBox(height: 16),
+        FormTextField(
+          label: 'Grade / type',
+          controller: _gradeController,
+          hintText: 'Cement, Iron, etc.',
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: FormTextField(
+                label: 'Quantity',
+                controller: _quantityController,
+                hintText: '50',
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: FormTextField(
+                label: 'Unit',
+                controller: _unitController,
+                hintText: 'pkts',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        FormTextField(
+          label: 'Vendor / supplier',
+          controller: _vendorController,
+          hintText: 'Enter vendor name',
+        ),
+        const SizedBox(height: 16),
+        _buildDropdownField(
+          label: 'Payment Type',
+          hint: '-- Select Payment Type --',
+        ),
+        const SizedBox(height: 16),
+        FormTextField(
+          label: 'Bill amount',
+          controller: _billAmountController,
+          hintText: '₹',
+          keyboardType: TextInputType.number,
+        ),
+        const SizedBox(height: 16),
+        PrimaryButton(text: 'Save Material Entry', onPressed: () {}),
+        const SizedBox(height: 12),
+        Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: AppRadius.mediumRadius,
+            border: Border.all(color: AppColors.primary, width: 2),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {},
+              borderRadius: AppRadius.mediumRadius,
+              child: Center(
+                child: Text(
+                  'Add New Material',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -457,76 +484,152 @@ class MachineryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
-      itemCount: 8,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFE0E0E0)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.02),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Machinery History header + Select
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(Icons.build, color: Colors.orange),
-              ),
-              const SizedBox(width: 16),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'CAT Excavator 320D',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      'Serial: #CAT-56901',
-                      style: TextStyle(color: Color(0xFF74777F), fontSize: 12),
-                    ),
-                  ],
+              const Text(
+                'Machinery History',
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
+                height: 42,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.surface,
+                  borderRadius: AppRadius.largeRadius,
+                  border: Border.all(
+                    color: AppColors.borderMedium,
+                    width: 1.18,
+                  ),
+                  boxShadow: AppColors.cardShadow,
                 ),
-                child: const Text(
-                  'At Work',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10,
+                child: Center(
+                  child: Text(
+                    'Select',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-        );
-      },
+          const SizedBox(height: 16),
+          _buildMachineryCard(
+            name: 'Excavator JCB 3D',
+            id: 'MH-12-EX-5678',
+            hours: '456h',
+            statusGreen: true,
+          ),
+          const SizedBox(height: 16),
+          _buildMachineryCard(
+            name: 'Tower Crane TC5013',
+            id: 'MH-12-CR-2341',
+            hours: '528h',
+            statusGreen: true,
+          ),
+          const SizedBox(height: 16),
+          _buildMachineryCard(
+            name: 'Concrete Mixer 500L',
+            id: 'MH-12-CM-8899',
+            hours: '348h',
+            statusGreen: false,
+          ),
+          const SizedBox(height: 100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMachineryCard({
+    required String name,
+    required String id,
+    required String hours,
+    required bool statusGreen,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.xlRadius,
+        border: Border.all(color: AppColors.border, width: 1.18),
+        boxShadow: AppColors.cardShadow,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: AppRadius.mediumRadius,
+            ),
+            child: const Icon(Icons.build, color: Colors.white, size: 24),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  id,
+                  style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: statusGreen
+                            ? AppColors.success
+                            : AppColors.warning,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      hours,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.keyboard_arrow_down,
+            size: 24,
+            color: AppColors.textSecondary,
+          ),
+        ],
+      ),
     );
   }
 }

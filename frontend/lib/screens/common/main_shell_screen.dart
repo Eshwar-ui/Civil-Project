@@ -23,7 +23,7 @@ class MainShellScreen extends StatelessWidget {
     final isHomePage = navigationShell.currentIndex == 0;
 
     return Scaffold(
-      body: navigationShell,
+      body: SafeArea(child: navigationShell),
       extendBody: true,
       bottomNavigationBar: isHomePage
           ? CustomBottomNavBarWithFAB(

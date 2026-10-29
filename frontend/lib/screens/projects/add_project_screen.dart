@@ -41,7 +41,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(20),
           child: Form(
             key: _formKey,
             child: Column(

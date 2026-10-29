@@ -23,7 +23,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
             children: [
               // Header Section
               Container(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: const BoxDecoration(
                   color: AppColors.surface,
                   border: Border(
@@ -108,7 +108,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
               // Content
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 120),
+                padding: const EdgeInsets.fromLTRB(20, 16, 20, 120),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -320,7 +320,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
   Widget _buildEfficiencyCard() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B), // Dark slate
         borderRadius: AppRadius.xlRadius,

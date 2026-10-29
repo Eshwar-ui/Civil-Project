@@ -34,7 +34,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
           children: [
             // Header Section with white background
             Container(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               decoration: const BoxDecoration(
                 color: AppColors.surface,
                 border: Border(
@@ -274,7 +274,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 120),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 120),
       itemCount: filteredProjects.length,
       separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {

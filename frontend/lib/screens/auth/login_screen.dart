@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

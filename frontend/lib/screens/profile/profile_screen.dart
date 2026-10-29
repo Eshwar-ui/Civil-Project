@@ -25,7 +25,10 @@ class ProfileScreen extends StatelessWidget {
               // Profile Header Section
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 33, horizontal: 24),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 33,
+                  horizontal: 20,
+                ),
                 decoration: const BoxDecoration(
                   color: AppColors.surface,
                   border: Border(
@@ -117,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
 
               // Profile Info Cards
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 34, 24, 0),
+                padding: const EdgeInsets.fromLTRB(20, 34, 20, 0),
                 child: Column(
                   children: [
                     _buildProfileCard(
@@ -153,7 +156,7 @@ class ProfileScreen extends StatelessWidget {
 
               // Settings Section
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 34, 24, 0),
+                padding: const EdgeInsets.fromLTRB(20, 34, 20, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

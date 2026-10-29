@@ -34,135 +34,91 @@ class _BlueprintsScreenState extends State<BlueprintsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0.9),
-        elevation: 0,
-        shadowColor: Colors.black.withOpacity(0.1),
-        surfaceTintColor: Colors.transparent,
-        leading: Container(
-          margin: const EdgeInsets.only(left: 4),
-          child: Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
-              borderRadius: AppRadius.largeRadius,
-              border: Border.all(color: AppColors.border, width: 1.18),
-            ),
-            child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 24,
-                color: AppColors.textSecondary,
-              ),
-              onPressed: () => context.pop(),
-              padding: EdgeInsets.zero,
-            ),
-          ),
-        ),
-        title: Column(
-          children: [
-            const Text(
-              'Project Management',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-                letterSpacing: -0.45,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                    color: AppColors.success.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  'SITE ACTIVE',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.success,
-                    letterSpacing: 1,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 4),
-            child: Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
-                borderRadius: AppRadius.largeRadius,
-                border: Border.all(color: AppColors.border, width: 1.18),
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.edit_outlined,
-                  size: 24,
-                  color: AppColors.textSecondary,
-                ),
-                onPressed: () {
-                  // TODO: Edit
-                },
-                padding: EdgeInsets.zero,
-              ),
-            ),
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.18),
-          child: Container(height: 1.18, color: AppColors.border),
+      appBar: ModernAppBar.projectHeader(
+        title: 'Project Management',
+        titleFontSize: 18,
+        onBack: () => context.pop(),
+        action: appBarActionButton(
+          icon: Icons.edit_outlined,
+          onPressed: () {
+            // TODO: Edit
+          },
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Breadcrumb
-            Row(
-              children: [
-                Text(
-                  'skyline Towers /',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textTertiary,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Breadcrumb
+              Row(
+                children: [
+                  Text(
+                    'skyline Towers /',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textTertiary,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'Blueprint /',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textTertiary,
+                  const SizedBox(width: 4),
+                  Text(
+                    'Blueprint /',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textTertiary,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
+                ],
+              ),
+              const SizedBox(height: 16),
 
-            // Search and Filter
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
+              // Search and Filter
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 56,
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: AppRadius.xlRadius,
+                        border: Border.all(
+                          color: AppColors.border,
+                          width: 1.18,
+                        ),
+                        boxShadow: AppColors.cardShadow,
+                      ),
+                      child: TextField(
+                        controller: _searchController,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: AppColors.textPrimary,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Search drawings...',
+                          hintStyle: const TextStyle(
+                            fontSize: 15,
+                            color: AppColors.textSecondary,
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            size: 18,
+                            color: AppColors.textSecondary,
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 17,
+                            vertical: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    width: 56,
                     height: 56,
                     decoration: BoxDecoration(
                       color: AppColors.surface,
@@ -170,130 +126,95 @@ class _BlueprintsScreenState extends State<BlueprintsScreen> {
                       border: Border.all(color: AppColors.border, width: 1.18),
                       boxShadow: AppColors.cardShadow,
                     ),
-                    child: TextField(
-                      controller: _searchController,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: AppColors.textPrimary,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'Search drawings...',
-                        hintStyle: const TextStyle(
-                          fontSize: 15,
-                          color: AppColors.textSecondary,
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          size: 18,
-                          color: AppColors.textSecondary,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 17,
-                          vertical: 1,
-                        ),
-                      ),
+                    child: const Icon(
+                      Icons.tune,
+                      size: 20,
+                      color: AppColors.textSecondary,
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: AppRadius.xlRadius,
-                    border: Border.all(color: AppColors.border, width: 1.18),
-                    boxShadow: AppColors.cardShadow,
-                  ),
-                  child: const Icon(
-                    Icons.tune,
-                    size: 20,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
+                ],
+              ),
+              const SizedBox(height: 32),
 
-            // Blueprints Section Header
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Blueprints',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                    letterSpacing: -0.475,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: _showCreateFolderSheet,
-                  child: Text(
-                    'Create Folders',
+              // Blueprints Section Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Blueprints',
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+                      color: AppColors.textPrimary,
+                      letterSpacing: -0.475,
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
+                  GestureDetector(
+                    onTap: _showCreateFolderSheet,
+                    child: Text(
+                      'Create Folders',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
 
-            // Admin Category
-            _buildCategoryDivider('admin'),
-            const SizedBox(height: 16),
-            _buildBlueprintCard(
-              icon: Icons.description_outlined,
-              iconColor: AppColors.primary,
-              iconBackground: AppColors.infoTint,
-              title: 'Main Architectural Plan',
-              version: 'v2.4',
-              author: 'Admin',
-              size: '4.8 MB',
-            ),
-            const SizedBox(height: 24),
+              // Admin Category
+              _buildCategoryDivider('admin'),
+              const SizedBox(height: 16),
+              _buildBlueprintCard(
+                icon: Icons.description_outlined,
+                iconColor: AppColors.primary,
+                iconBackground: AppColors.infoTint,
+                title: 'Main Architectural Plan',
+                version: 'v2.4',
+                author: 'Admin',
+                size: '4.8 MB',
+              ),
+              const SizedBox(height: 24),
 
-            // General Category
-            _buildCategoryDivider('General'),
-            const SizedBox(height: 16),
-            _buildBlueprintCard(
-              icon: Icons.description_outlined,
-              iconColor: AppColors.warning,
-              iconBackground: AppColors.warningTintAlt,
-              title: 'Structural Beam Layout',
-              version: 'v1.1',
-              author: 'Structural Eng.',
-              size: '12.2 MB',
-            ),
-            const SizedBox(height: 16),
-            _buildBlueprintCard(
-              icon: Icons.description_outlined,
-              iconColor: AppColors.primary,
-              iconBackground: AppColors.infoTint,
-              title: 'Electrical Conduit Path',
-              version: 'v3.0',
-              author: 'Site Head',
-              size: '2.5 MB',
-            ),
-            const SizedBox(height: 16),
-            _buildBlueprintCard(
-              icon: Icons.description_outlined,
-              iconColor: AppColors.primary,
-              iconBackground: AppColors.infoTint,
-              title: 'Plumbing Isometric',
-              version: 'v1.2',
-              author: 'Admin',
-              size: '3.1 MB',
-            ),
+              // General Category
+              _buildCategoryDivider('General'),
+              const SizedBox(height: 16),
+              _buildBlueprintCard(
+                icon: Icons.description_outlined,
+                iconColor: AppColors.warning,
+                iconBackground: AppColors.warningTintAlt,
+                title: 'Structural Beam Layout',
+                version: 'v1.1',
+                author: 'Structural Eng.',
+                size: '12.2 MB',
+              ),
+              const SizedBox(height: 16),
+              _buildBlueprintCard(
+                icon: Icons.description_outlined,
+                iconColor: AppColors.primary,
+                iconBackground: AppColors.infoTint,
+                title: 'Electrical Conduit Path',
+                version: 'v3.0',
+                author: 'Site Head',
+                size: '2.5 MB',
+              ),
+              const SizedBox(height: 16),
+              _buildBlueprintCard(
+                icon: Icons.description_outlined,
+                iconColor: AppColors.primary,
+                iconBackground: AppColors.infoTint,
+                title: 'Plumbing Isometric',
+                version: 'v1.2',
+                author: 'Admin',
+                size: '3.1 MB',
+              ),
 
-            // Bottom padding
-            const SizedBox(height: 120),
-          ],
+              // Bottom padding
+              const SizedBox(height: 120),
+            ],
+          ),
         ),
       ),
     );
@@ -473,7 +394,7 @@ class _CreateFolderBottomSheetState extends State<CreateFolderBottomSheet> {
                 boxShadow: AppColors.cardShadow,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -523,12 +444,19 @@ class _CreateFolderBottomSheetState extends State<CreateFolderBottomSheet> {
                         ),
                         const SizedBox(width: 12),
                         // Toggle Switch
-                        Switch(
-                          value: isVisible,
-                          onChanged: (value) {
-                            setState(() {
-                              isVisible = !isVisible;
-                            });
+                        StatefulBuilder(
+                          builder: (context, setLocalState) {
+                            return Switch(
+                              value: isVisible,
+                              onChanged: (value) {
+                                setLocalState(() {
+                                  isVisible = value;
+                                });
+                                setState(() {
+                                  isVisible = value;
+                                });
+                              },
+                            );
                           },
                         ),
                       ],

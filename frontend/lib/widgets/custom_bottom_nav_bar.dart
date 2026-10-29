@@ -20,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
         color: AppColors.surface,
         border: Border(top: BorderSide(color: AppColors.border, width: 1.18)),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: SafeArea(
         top: false,
         child: Row(
@@ -145,7 +145,7 @@ class CustomBottomNavBarWithFAB extends StatelessWidget {
               top: BorderSide(color: AppColors.border, width: 1.18),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           child: SafeArea(
             top: false,
             child: Row(
